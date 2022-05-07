@@ -16,6 +16,12 @@ export interface LanguageToolPluginSettings {
 	ruleOtherCategories?: string;
 	ruleOtherRules?: string;
 	ruleOtherDisabledRules?: string;
+	prefLangEnabled?: boolean;
+	prefLangEnglish?: 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';
+	prefLangGerman?: 'de-DE' | 'de-CH' | 'de-AT';
+	prefLangSpanish?: null;
+	prefLangPortuguese?: null;
+	prefLangCatalan?: null;
 }
 
 export const DEFAULT_SETTINGS: LanguageToolPluginSettings = {
@@ -301,6 +307,18 @@ export class LanguageToolSettingsTab extends PluginSettingTab {
 						a.setAttr('target', '_blank');
 					},
 				);
+			});
+
+		new Setting(containerEl)
+			.setName('Number of repetitions')
+			.setDesc('Here you can set your default number for repetition reminders')
+			.addDropdown(dropDown => {
+				dropDown.addOption('1', '1 Repetition');
+				dropDown.addOption('2', '2 Repetitions');
+				dropDown.onChange(async value => {
+					this.plugin.settings.repetitions = value;
+					await this.plugin.saveSettings();
+				});
 			});
 	}
 }
