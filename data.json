@@ -5,6 +5,7 @@
   "shouldAutoCheck": false,
   "pickyMode": false,
   "prefLangEnabled": false,
-  "prefLangEnglish": "en-US",
-  "staticLanguage": "br-FR"
+  "prefLangEnglish": "en-AU",
+  "staticLanguage": "auto",
+  "prefLangGerman": "de-CH"
 }

@@ -78,12 +78,16 @@ export interface LanguageToolPluginSettings {
 	ruleOtherRules?: string;
 	ruleOtherDisabledRules?: string;
 	prefLangEnabled?: boolean;
-	prefLangEnglish?: Prefenglish;
-	prefLangGerman?: 'de-DE' | 'de-CH' | 'de-AT';
+	prefLangEnglish?: PrefEnglish;
+	prefLangGerman?: PrefGerman;
 	prefLangSpanish?: null;
 	prefLangPortuguese?: null;
 	prefLangCatalan?: null;
 }
 
 // Types for the languages
-export type Prefenglish = 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';
+export type PrefEnglish = 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';
+export type PrefGerman = 'de-DE' | 'de-CH' | 'de-AT';
+export type PrefSpanish = 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';
+export type PrefPortuguese = 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';
+export type PrefCatalan = 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';

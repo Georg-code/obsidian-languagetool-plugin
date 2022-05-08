@@ -1,6 +1,13 @@
 import { App, DropdownComponent, Modal, PluginSettingTab, Setting, TextComponent } from 'obsidian';
 import LanguageToolPlugin from '.';
-import { LanguageToolPluginSettings, Prefenglish } from './LanguageToolTypings';
+import {
+	LanguageToolPluginSettings,
+	PrefEnglish,
+	// PrefCatalan,
+	// PrefPortuguese,
+	PrefGerman,
+	// PrefSpanish,
+} from './LanguageToolTypings';
 export const DEFAULT_SETTINGS: LanguageToolPluginSettings = {
 	serverUrl: 'https://api.languagetool.org',
 	urlMode: 'standard',
@@ -295,18 +302,41 @@ export class LanguageToolSettingsTab extends PluginSettingTab {
 					? 'Set the language variant to you like. (Only available if "Autodetect" is enabled'
 					: 'Autodetect is disabled, therefore this setting is not available',
 			)
-			.addDropdown(dropDown => {
-				dropDown.addOption('en-UK', '🇬🇧 United Kingdom');
-				dropDown.addOption('en-US', '🇺🇸 USA');
-				dropDown.addOption('en-AU', '🇦🇺 Australia');
-				dropDown.addOption('en-ZA', '🇿🇦 South Africa');
-				dropDown.addOption('en-NZ', '🇳🇿 New Zealand');
-				dropDown.setValue(this.plugin.settings.prefLangEnglish || 'en-GB');
-				dropDown.setDisabled(this.plugin.settings.staticLanguage !== 'auto');
-				dropDown.onChange(async value => {
-					this.plugin.settings.prefLangEnglish = (value as Prefenglish) || 'en-GB';
-					await this.plugin.saveSettings();
+			.then(setting => {
+				setting.addDropdown(dropDown => {
+					dropDown.addOption('en-US', '🇺🇸 English (USA)');
+					dropDown.addOption('en-UK', '🇬🇧 English (UK)');
+					dropDown.addOption('en-AU', '🇦🇺 English (Australia)');
+					dropDown.addOption('en-ZA', '🇿🇦 English (South Africa)');
+					dropDown.addOption('en-NZ', '🇳🇿 English (New Zealand)');
+					dropDown.setValue(this.plugin.settings.prefLangEnglish ?? 'en-GB');
+					dropDown.setDisabled(this.plugin.settings.staticLanguage !== 'auto');
+					dropDown.onChange(async value => {
+						this.plugin.settings.prefLangEnglish = (value as PrefEnglish) || 'en-GB';
+						await this.plugin.saveSettings();
+					});
 				});
+				setting.addDropdown(dropDown => {
+					dropDown.addOption('de-DE', '🇩🇪 German (Germany)');
+					dropDown.addOption('de-AT', '🇦🇹 German (Austria)');
+					dropDown.addOption('de-CH', '🇨🇭 German (Switzerland)');
+					dropDown.setValue(this.plugin.settings.prefLangGerman ?? 'de-DE');
+					dropDown.setDisabled(this.plugin.settings.staticLanguage !== 'auto');
+					dropDown.onChange(async value => {
+						this.plugin.settings.prefLangGerman = (value as PrefGerman) ?? 'de-DE';
+						await this.plugin.saveSettings();
+					});
+				});
+				// styling
+				setting.controlEl.style.display = 'flex';
+				setting.controlEl.style.flexDirection = 'column';
+				setting.controlEl.style.alignItems = 'flex-end';
+				const collection = setting.controlEl.children;
+				// eslint-disable-next-line @typescript-eslint/prefer-for-of
+				for (let i = 0; i < collection.length; i++) {
+					const elm = collection[i] as HTMLElement;
+					elm.style.marginBottom = '5px';
+				}
 			});
 	}
 }
