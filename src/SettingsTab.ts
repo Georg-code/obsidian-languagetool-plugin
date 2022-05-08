@@ -17,12 +17,14 @@ export interface LanguageToolPluginSettings {
 	ruleOtherRules?: string;
 	ruleOtherDisabledRules?: string;
 	prefLangEnabled?: boolean;
-	prefLangEnglish?: 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';
+	prefLangEnglish?: Prefenglish;
 	prefLangGerman?: 'de-DE' | 'de-CH' | 'de-AT';
 	prefLangSpanish?: null;
 	prefLangPortuguese?: null;
 	prefLangCatalan?: null;
 }
+
+type Prefenglish = 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';
 
 export const DEFAULT_SETTINGS: LanguageToolPluginSettings = {
 	serverUrl: 'https://api.languagetool.org',
@@ -309,14 +311,16 @@ export class LanguageToolSettingsTab extends PluginSettingTab {
 				);
 			});
 
+		// Language Variant Component. Inspired by Issue #40
 		new Setting(containerEl)
 			.setName('Number of repetitions')
 			.setDesc('Here you can set your default number for repetition reminders')
 			.addDropdown(dropDown => {
-				dropDown.addOption('1', '1 Repetition');
-				dropDown.addOption('2', '2 Repetitions');
+				dropDown.addOption('en-UK', '🇬🇧 United Kingdom');
+				dropDown.addOption('en-US', '🇺🇸 USA');
+				dropDown.setValue(this.plugin.settings.prefLangEnglish || 'en-GB');
 				dropDown.onChange(async value => {
-					this.plugin.settings.repetitions = value;
+					this.plugin.settings.prefLangEnglish = (value as Prefenglish) || 'en-GB';
 					await this.plugin.saveSettings();
 				});
 			});

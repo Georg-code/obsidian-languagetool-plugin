@@ -1,6 +1,6 @@
 {
 	"id": "obsidian-languagetool-plugin",
-	"name": "LanguageTool Integration",
+	"name": "LanguageTool Integration DEV",
 	"version": "0.2.7",
 	"minAppVersion": "0.13.24",
 	"description": "Spelling and grammar checks with the LanguageTool API",
