@@ -1,8 +1,7 @@
 import * as Remark from 'annotatedtext-remark';
 import { Notice } from 'obsidian';
 import { getRuleCategories } from './helpers';
-import { LanguageToolApi } from './LanguageToolTypings';
-import { LanguageToolPluginSettings } from './SettingsTab';
+import { LanguageToolApi, LanguageToolPluginSettings } from './LanguageToolTypings';
 
 export async function getDetectionResult(
 	text: string,

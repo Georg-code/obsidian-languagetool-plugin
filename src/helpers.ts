@@ -1,4 +1,4 @@
-import { LanguageToolPluginSettings } from './SettingsTab';
+import { LanguageToolPluginSettings } from './LanguageToolTypings';
 
 export const ignoreListRegEx = /frontmatter|code|math|templater|blockid|hashtag|internal/;
 
