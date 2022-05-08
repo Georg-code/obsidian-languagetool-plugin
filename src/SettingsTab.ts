@@ -189,6 +189,7 @@ export class LanguageToolSettingsTab extends PluginSettingTab {
 						component.onChange(async value => {
 							this.plugin.settings.staticLanguage = value;
 							await this.plugin.saveSettings();
+							this.display(); // updated settings tab and disables / enables the language dropdown
 						});
 					})
 					.catch(console.error);
@@ -288,12 +289,20 @@ export class LanguageToolSettingsTab extends PluginSettingTab {
 
 		// Language Variant Component. Inspired by Issue #40
 		new Setting(containerEl)
-			.setName('Number of repetitions')
-			.setDesc('Here you can set your default number for repetition reminders')
+			.setName('Language Variant')
+			.setDesc(
+				this.plugin.settings.staticLanguage === 'auto'
+					? 'Set the language variant to you like. (Only available if "Autodetect" is enabled'
+					: 'Autodetect is disabled, therefore this setting is not available',
+			)
 			.addDropdown(dropDown => {
 				dropDown.addOption('en-UK', '🇬🇧 United Kingdom');
 				dropDown.addOption('en-US', '🇺🇸 USA');
+				dropDown.addOption('en-AU', '🇦🇺 Australia');
+				dropDown.addOption('en-ZA', '🇿🇦 South Africa');
+				dropDown.addOption('en-NZ', '🇳🇿 New Zealand');
 				dropDown.setValue(this.plugin.settings.prefLangEnglish || 'en-GB');
+				dropDown.setDisabled(this.plugin.settings.staticLanguage !== 'auto');
 				dropDown.onChange(async value => {
 					this.plugin.settings.prefLangEnglish = (value as Prefenglish) || 'en-GB';
 					await this.plugin.saveSettings();
