@@ -1,31 +1,6 @@
 import { App, DropdownComponent, Modal, PluginSettingTab, Setting, TextComponent } from 'obsidian';
 import LanguageToolPlugin from '.';
-
-export interface LanguageToolPluginSettings {
-	shouldAutoCheck: boolean;
-
-	serverUrl: string;
-	urlMode: 'standard' | 'premium' | 'custom';
-	glassBg: boolean;
-	apikey?: string;
-	username?: string;
-	staticLanguage?: string;
-
-	pickyMode: boolean;
-
-	ruleOtherCategories?: string;
-	ruleOtherRules?: string;
-	ruleOtherDisabledRules?: string;
-	prefLangEnabled?: boolean;
-	prefLangEnglish?: Prefenglish;
-	prefLangGerman?: 'de-DE' | 'de-CH' | 'de-AT';
-	prefLangSpanish?: null;
-	prefLangPortuguese?: null;
-	prefLangCatalan?: null;
-}
-
-type Prefenglish = 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';
-
+import { LanguageToolPluginSettings, Prefenglish } from './LanguageToolTypings';
 export const DEFAULT_SETTINGS: LanguageToolPluginSettings = {
 	serverUrl: 'https://api.languagetool.org',
 	urlMode: 'standard',

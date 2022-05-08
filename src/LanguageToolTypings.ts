@@ -60,3 +60,30 @@ export interface Category {
 	id: string;
 	name: string;
 }
+
+// Interface for Plugin Settings
+export interface LanguageToolPluginSettings {
+	shouldAutoCheck: boolean;
+
+	serverUrl: string;
+	urlMode: 'standard' | 'premium' | 'custom';
+	glassBg: boolean;
+	apikey?: string;
+	username?: string;
+	staticLanguage?: string;
+
+	pickyMode: boolean;
+
+	ruleOtherCategories?: string;
+	ruleOtherRules?: string;
+	ruleOtherDisabledRules?: string;
+	prefLangEnabled?: boolean;
+	prefLangEnglish?: Prefenglish;
+	prefLangGerman?: 'de-DE' | 'de-CH' | 'de-AT';
+	prefLangSpanish?: null;
+	prefLangPortuguese?: null;
+	prefLangCatalan?: null;
+}
+
+// Types for the languages
+export type Prefenglish = 'en-GB' | 'en-US' | 'en-AU' | 'en-ZA' | 'en-NZ';
